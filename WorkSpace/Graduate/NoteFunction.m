@@ -18,7 +18,7 @@
     NSLog(@"Called!ViewDidLoad");
     [self secondViewDidLoad];
     [self UITextFieldInit];
-    //[self InitToolBar];
+    [self InitToolBar];
     
     self.title = @"ノート";
 
@@ -34,9 +34,10 @@
 -(void)UITextFieldInit{
     NSLog(@"called!:UITextFieldInit");
     // テキストフィールド例文
-    
-    
-    CGRect rect = CGRectMake(0, 8, 320, 400);
+
+    CGRect rect2 = [[UIScreen mainScreen] applicationFrame];
+    NSLog(@"rect2.size.width : %f , rect2.size.height : %f", rect2.size.width, rect2.size.height);
+    CGRect rect = rect2;
     tv = [[UITextView alloc] initWithFrame:rect];
     tv.delegate = self;
     tv.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:20];
