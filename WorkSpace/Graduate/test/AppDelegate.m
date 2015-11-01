@@ -49,52 +49,26 @@
 
     [window addSubview:tabBarController.view];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    
     /*
-    //ステータスバー領域を含む画面のサイズを返す
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    UITabBarController *tab = [UITabBarController new];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //GoalViewController *goal =[GoalViewController new];
-    
-    //コントローラーの生成
-    NoteFunction *note = [[NoteFunction alloc]init];
-   
-    navigationController = [[UINavigationController alloc]initWithRootViewController
-                            :[[FirstViewController alloc] init]];
-    //ViewControllerをまとめる
-    NSArray *view = [NSArray arrayWithObjects:navigationController,note,nil];
-    
-    [tab setViewControllers:view animated:NO];
-    [self.window addSubview:tab.view];
-    //UIWindowにルートビューコントローラーを設定
-    navigationController.title =@"目標管理";
-    note.title= @"ノート";
-    [self.window setRootViewController:tab];
-    [self.window makeKeyAndVisible];
-    
-
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detectedTapGesture:)];
+    [window addGestureRecognizer:tapGestureRecognizer];
     */
-    
-    //ナビゲーションコントローラー生成
-    /*
-    //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
-    self.window.backgroundColor = [UIColor blackColor];
-    //self.window.rootViewController = navigationController;
-    FirstViewController *first = [[FirstViewController alloc]init];
-    UITabBarController* t = [[UITabBarController alloc] init];
-    [t setViewControllers:@[first]];
-    navigationController= [[UINavigationController alloc] initWithRootViewController:t];
-    navigationController= [[UINavigationController alloc] initWithRootViewController:first];
-    first.navigationController.title =@"テスト";
-    [self.window setRootViewController:navigationController];
-    [self.window makeKeyAndVisible];
-  */
+  
     return YES;
      
 }
+
+/*- (void)detectedTapGesture:(UITapGestureRecognizer *)sender {
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    CGPoint point = [sender locationOfTouch:0 inView:window];
+    NSLog(@"tap point: %@", NSStringFromCGPoint(point));
+    
+}
+ */
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

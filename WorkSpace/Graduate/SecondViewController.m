@@ -13,12 +13,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    cource = [[UITextField alloc] initWithFrame:CGRectMake(80,100,160,80)];
-    alltime = [[UITextField alloc]initWithFrame:CGRectMake(80, 145, 160, 80)];
-    averageTime = [[UITextField alloc]initWithFrame:CGRectMake(190, 190, 160, 80)];
-    hope = [[UITextField alloc]initWithFrame:CGRectMake(120, 290, 160, 80)];
-    place = [[UITextField alloc]initWithFrame:CGRectMake(150,330,160,80)];
-    time =[[UITextField alloc]initWithFrame:CGRectMake(145, 375, 160, 80)];
+    cource = [[UITextField alloc] initWithFrame:CGRectMake(106,100,160,80)];
+    alltime = [[UITextField alloc]initWithFrame:CGRectMake(106, 145, 160, 80)];
+    averageTime = [[UITextField alloc]initWithFrame:CGRectMake(220, 190, 160, 80)];
+    hope = [[UITextField alloc]initWithFrame:CGRectMake(150, 290, 160, 80)];
+    place = [[UITextField alloc]initWithFrame:CGRectMake(180,332,160,80)];
+    time =[[UITextField alloc]initWithFrame:CGRectMake(175, 377, 160, 80)];
     [self titleInit];
     [self myTableView];
     // Do any additional setup after loading the view, typically from a nib.}
