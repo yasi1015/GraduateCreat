@@ -18,7 +18,8 @@
     NSLog(@"Called!ViewDidLoad");
     [self secondViewDidLoad];
     [self UITextFieldInit];
-    [self InitToolBar];
+    //[self InitToolBar];
+    
     self.title = @"ノート";
 
     // Do any additional setup after loading the view, typically from a nib.}
@@ -147,17 +148,30 @@
     NSLog(@"selectedText:%@",selectedText);
     if(selectedText == nil || [selectedText isEqualToString:@""]){
         NSLog(@"選択されていません！");
-     UITextPosition *position = [self->tv selectedTextRange];
+        UITextPosition *position = [self->tv selectedTextRange];
         NSLog(@"position:%@",position);
         int posittionx = position;
         NSLog(@"int posittionx:%d",posittionx );
-
-
-        
-        
-
     }
         
+}
+
+
+-(void)initToolBar{
+    UIView* accessoryView =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
+    accessoryView.backgroundColor = [UIColor whiteColor];
+    
+    // ボタンを作成する。
+    UIButton* closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    closeButton.frame = CGRectMake(210,10,100,30);
+    [closeButton setTitle:@"閉じる" forState:UIControlStateNormal];
+    // ボタンを押したときによばれる動作を設定する。
+    [closeButton addTarget:self action:@selector(closeKeyboard:) forControlEvents:UIControlEventTouchUpInside];
+    // ボタンをViewに貼る
+    [accessoryView addSubview:closeButton];
+    
+    //inputText.inputAccessoryView = accessoryView;
+
 }
 
 
