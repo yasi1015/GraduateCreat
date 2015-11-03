@@ -10,6 +10,7 @@
 #import "FirstViewController.h" //add
 #import "SecondViewController.h" //add
 #import "NoteFunction.h"
+#import "FileViewController.h"
 
 
 
@@ -29,7 +30,9 @@
      self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //2 UIViewControllerの生成
     FirstViewController *firstViewController = [[FirstViewController alloc] initWithNibName:nil bundle:nil];
+    FileViewController *fileViewController = [[FileViewController alloc] initWithNibName:nil bundle:nil];
     NoteFunction *noteFunction = [[NoteFunction alloc]initWithNibName:nil bundle:nil];
+    
     
     
 
@@ -37,9 +40,10 @@
     //3 UINavigationControllerの生成
     navigationController1 = [[UINavigationController alloc]initWithRootViewController:firstViewController];
     navigationController2 = [[UINavigationController alloc]initWithRootViewController:noteFunction];
+    navigationController3 = [[UINavigationController alloc]initWithRootViewController:fileViewController];
 
     //4 NavigationControllerを配列にしてまとめる
-    navi = [NSArray arrayWithObjects:navigationController1,navigationController2,nil];
+    navi = [NSArray arrayWithObjects:navigationController1,navigationController2,navigationController3,nil];
     //5 tabbarcontrollerの生成
     UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     [tabBarController setViewControllers:navi animated:NO];

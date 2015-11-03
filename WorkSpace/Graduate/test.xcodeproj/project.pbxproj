@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		771492091BD78B91007AE163 /* NoteFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 771492081BD78B91007AE163 /* NoteFunction.m */; };
+		77487E941BE882520063D2F0 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77487E931BE882520063D2F0 /* FileViewController.m */; };
 		77A071F11BA2A0FC00C5CE77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A071F01BA2A0FC00C5CE77 /* main.m */; };
 		77A071F41BA2A0FC00C5CE77 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A071F31BA2A0FC00C5CE77 /* AppDelegate.m */; };
 		77A071FC1BA2A0FC00C5CE77 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A071FB1BA2A0FC00C5CE77 /* Images.xcassets */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		771492071BD78B91007AE163 /* NoteFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoteFunction.h; path = test.xcodeproj/../NoteFunction.h; sourceTree = SOURCE_ROOT; };
 		771492081BD78B91007AE163 /* NoteFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteFunction.m; path = test.xcodeproj/../NoteFunction.m; sourceTree = SOURCE_ROOT; };
+		77487E921BE882520063D2F0 /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		77487E931BE882520063D2F0 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		77A071EB1BA2A0FC00C5CE77 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A071EF1BA2A0FC00C5CE77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77A071F01BA2A0FC00C5CE77 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				77A072221BA2C8DC00C5CE77 /* FirstViewController.m */,
 				77A0721E1BA2C85D00C5CE77 /* SecondViewController.h */,
 				77A0721F1BA2C85D00C5CE77 /* SecondViewController.m */,
+				77487E921BE882520063D2F0 /* FileViewController.h */,
+				77487E931BE882520063D2F0 /* FileViewController.m */,
 				771492071BD78B91007AE163 /* NoteFunction.h */,
 				771492081BD78B91007AE163 /* NoteFunction.m */,
 				77A071FB1BA2A0FC00C5CE77 /* Images.xcassets */,
@@ -201,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77487E941BE882520063D2F0 /* FileViewController.m in Sources */,
 				77A072201BA2C85D00C5CE77 /* SecondViewController.m in Sources */,
 				771492091BD78B91007AE163 /* NoteFunction.m in Sources */,
 				77A071F41BA2A0FC00C5CE77 /* AppDelegate.m in Sources */,
