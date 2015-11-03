@@ -27,6 +27,7 @@
     [self secondViewDidLoad];
     [self UINavigationController];
     [self myTableView];
+    [self ipadoriphone];
 
    
    
@@ -34,6 +35,15 @@
     
    
     // Do any additional setup after loading the view, typically from a nib.}
+}
+
+-(void)ipadoriphone{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        NSLog(@"iPhoneの処理");
+    }
+    else{
+        NSLog(@"iPadの処理");
+    }
 }
 
 -(void)secondViewDidLoad{
