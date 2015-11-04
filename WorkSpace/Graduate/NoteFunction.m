@@ -127,6 +127,7 @@
     }
 
 }
+
 -(void)changebutton{
     NSLog(@"changebutton");
      NSRange selectedRange = self->tv.selectedRange;
@@ -143,6 +144,7 @@
     }
 
 }
+
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
     NSString *selectedText = [textView.text substringWithRange:textView.selectedRange];
@@ -172,7 +174,6 @@
     [accessoryView addSubview:closeButton];
     
     //inputText.inputAccessoryView = accessoryView;
-
 }
 
 

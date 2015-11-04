@@ -15,6 +15,7 @@
     [self secondViewDidLoad];
     [self myTableView];
     [self fileInit];
+    [self UINavigationController];
  
 }
 
@@ -47,8 +48,23 @@
     NSError *error;
     NSLog(@"error = %@",error);
     
-    list = [fileManager contentsOfDirectoryAtPath:homedir error:&error];
+    NSString *documentsDir = [homedir stringByAppendingString:@"/Documents"];
+    NSLog(@"現在のディレクトリは%@です",documentsDir);
+    
+    list = [fileManager contentsOfDirectoryAtPath:documentsDir error:&error];
     NSLog(@"list = %@",list);
+    
+    NSString *docpath = [documentsDir stringByAppendingPathComponent:@"/sample"];
+    BOOL result = [fileManager createDirectoryAtPath:docpath
+                         withIntermediateDirectories:YES
+                                          attributes:nil
+                                               error:&error];
+    if (result) {
+        NSLog(@"ディレクトリの作成に成功：%@", docpath);
+    } else {
+        NSLog(@"ディレクトリの作成に失敗：%@", error.description);
+    }
+    
     
 }
 /**
@@ -103,6 +119,66 @@
 }
 
 
+-(void)UINavigationController{
+    NSLog(@"UINavigationController");
+    
+    
+    UIBarButtonItem *btn =
+    [[UIBarButtonItem alloc]
+     initWithBarButtonSystemItem:UIBarButtonSystemItemCompose  // スタイルを指定
+     target:self  // デリゲートのターゲットを指定
+     action:@selector(ButtonPressed:)  // ボタンが押されたときに呼ばれるメソッドを指定
+     ];
+    self.navigationItem.rightBarButtonItem = btn;
+    
+}
+
+-(void)ButtonPressed:(id) sender{
+    NSLog(@"呼ばれました！");
+   /* UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle:@"ファイルを作成しますか？"
+                               message:nil
+                              delegate:self
+                     cancelButtonTitle:@"YES"
+                     otherButtonTitles:@"NO"];*/
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"タイトルを入力してください"
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"cancel"
+                                          otherButtonTitles:@"OK", nil];
+    
+    alert.delegate = self;
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;  //←追加
+    alert.frame = CGRectMake( 0, 50, 300, 300);
+    
+    UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
+    field.placeholder = @"Input data, here.";
+    
+    field.borderStyle = UITextBorderStyleRoundedRect;
+    [field setBackgroundColor:[UIColor whiteColor]];
+    field.delegate = self;
+    field = [alert textFieldAtIndex:0];  //←追加
+    [alert addSubview:field];//重要
+    [alert show];
+
+}
+
+
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"YESが押されました");
+            //１番目のボタンが押されたときの処理を記述する
+            
+            break;
+        case 1:
+            //２番目のボタンが押されたときの処理を記述する
+            break;
+    }
+    
+}
 
 
 
