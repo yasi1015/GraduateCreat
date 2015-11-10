@@ -43,7 +43,7 @@
     navigationController3 = [[UINavigationController alloc]initWithRootViewController:fileViewController];
 
     //4 NavigationControllerを配列にしてまとめる
-    navi = [NSArray arrayWithObjects:navigationController1,navigationController2,navigationController3,nil];
+    navi = [NSArray arrayWithObjects:navigationController1,navigationController3,nil];
     //5 tabbarcontrollerの生成
     UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     [tabBarController setViewControllers:navi animated:NO];

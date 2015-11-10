@@ -7,6 +7,7 @@
 //
 
 #import "FileViewController.h"
+#import "NoteFunction.h"
 
 @implementation FileViewController
 
@@ -104,6 +105,9 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"「%@」が選択されました", [list objectAtIndex:indexPath.row]);
+    NoteFunction *note = [NoteFunction new];
+    
+    [self.navigationController pushViewController:note animated:NO];
     switch (indexPath.row) {
         case 0:
             NSLog(@"indexPath.row%dが選択されました",indexPath.row);
