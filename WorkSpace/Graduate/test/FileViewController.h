@@ -10,9 +10,11 @@
 
 @interface FileViewController : UIViewController <UITableViewDelegate>{
     NSArray *dataSource;
-    NSArray *list;
+    NSMutableArray *list;
     NSString *homedir;
     UITableView *myTableView;
+    UITextField *field;
+    NSString *string;
 }
 
 @property (strong, nonatomic) UIWindow *window;

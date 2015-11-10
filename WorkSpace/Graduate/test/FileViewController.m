@@ -12,6 +12,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    myTableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStyleGrouped];
     [self secondViewDidLoad];
     [self myTableView];
     [self fileInit];
@@ -24,12 +25,14 @@
     self.title = @"ファイル作成";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [list removeAllObjects];
+ 
 
 }
 
 -(void)myTableView{
     NSLog(@"myTableView");
-    myTableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStyleGrouped];
+ 
     //myTableView = [[UITableView alloc] initWithFrame:[self.view bounds]];
     myTableView.delegate = self;
     myTableView.dataSource = self;
@@ -135,49 +138,87 @@
 
 -(void)ButtonPressed:(id) sender{
     NSLog(@"呼ばれました！");
-   /* UIAlertView *alert =
-    [[UIAlertView alloc] initWithTitle:@"ファイルを作成しますか？"
-                               message:nil
-                              delegate:self
-                     cancelButtonTitle:@"YES"
-                     otherButtonTitles:@"NO"];*/
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"タイトルを入力してください"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"cancel"
-                                          otherButtonTitles:@"OK", nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Title" message:@"message" preferredStyle:UIAlertControllerStyleAlert];
     
-    alert.delegate = self;
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;  //←追加
-    alert.frame = CGRectMake( 0, 50, 300, 300);
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action) {
+                                                NSLog(@"OK pushed");
+                                                
+                                            }]];
     
-    UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
-    field.placeholder = @"Input data, here.";
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"text input";
+        textField.delegate = self;
+    }];
     
-    field.borderStyle = UITextBorderStyleRoundedRect;
-    [field setBackgroundColor:[UIColor whiteColor]];
-    field.delegate = self;
-    field = [alert textFieldAtIndex:0];  //←追加
-    [alert addSubview:field];//重要
-    [alert show];
-
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
-
--(void)alertView:(UIAlertView*)alertView
-clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    string = [NSString new];
+    string = textField.text;
+    NSLog(@"text = %@です",string);
+    [self newFileInit];
     
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"YESが押されました");
-            //１番目のボタンが押されたときの処理を記述する
-            
-            break;
-        case 1:
-            //２番目のボタンが押されたときの処理を記述する
-            break;
+    //---------------------------------
+}
+
+-(void)newFileInit{
+    
+    NSLog(@"newFileInit");
+    homedir = NSHomeDirectory();
+    NSLog(@"homedir = %@",homedir);
+    //NSArrayのhomedirのファイルの中を検索する
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSLog(@"fileManager %@",fileManager);
+    //エラー用の変数を作成
+    NSError *error;
+    NSLog(@"error = %@",error);
+    NSString *documentsDir = [homedir stringByAppendingString:@"/Documents"];
+    NSLog(@"現在のディレクトリは%@です",documentsDir);
+    
+    list = [fileManager contentsOfDirectoryAtPath:documentsDir error:&error];
+    [list removeAllObjects];
+    NSLog(@"list = %@",list);
+    
+    NSString *docpath = [documentsDir stringByAppendingPathComponent:string];
+    
+    //ファイル作成
+    BOOL result = [fileManager createDirectoryAtPath:docpath
+                         withIntermediateDirectories:YES
+                                          attributes:nil
+                                               error:&error];
+    if (result) {
+        NSLog(@"ディレクトリの作成に成功：%@", docpath);
+        [myTableView reloadData];
+    } else {
+        NSLog(@"ディレクトリの作成に失敗：%@", error.description);
     }
     
+    /*ファイルの削除
+    
+    BOOL result = [fileManager removeItemAtPath:documentsDir error:&error];
+    if (result) {
+        NSLog(@"ファイルを削除に成功：%@", documentsDir);
+    } else {
+        NSLog(@"ファイルの削除に失敗：%@", error.description);
+    }
+  */
+    
+    /*ファイルの作成
+     BOOL result = [fileManager createDirectoryAtPath:docpath
+                         withIntermediateDirectories:YES
+                                          attributes:nil
+                                               error:&error];
+    if (result) {
+        NSLog(@"ディレクトリの作成に成功：%@", docpath);
+        [myTableView reloadData];
+    } else {
+        NSLog(@"ディレクトリの作成に失敗：%@", error.description);
+    }
+    */
+
 }
 
 

@@ -50,6 +50,7 @@
 
     self.window.rootViewController = tabBarController;
     noteFunction.title = @"ノート";
+    fileViewController.title = @"メモ一覧";
 
     [window addSubview:tabBarController.view];
     [self.window makeKeyAndVisible];
