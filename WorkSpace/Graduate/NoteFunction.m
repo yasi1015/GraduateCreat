@@ -34,13 +34,14 @@
     NSLog(@"called!:UITextFieldInit");
     // テキストフィールド例文
     
-    
+
     CGRect rect = CGRectMake(0, 8, 320, 400);
-    tv = [[UITextView alloc] initWithFrame:rect];
+    tv = [[UITextView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     tv.delegate = self;
     tv.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:20];
     tv.editable = YES;
     tv.scrollEnabled = NO;
+    
 
     
     [self.view addSubview:tv];
@@ -95,6 +96,10 @@
         NSLog(@"my range is %@", NSStringFromRange(selectedRange));
         // 変更を加えたattributedStringを戻す。
         tv.attributedText = theText;
+        
+        UIFont *font = self->tv.font; // フォントを取得
+        self->tv.typingAttributes = @{NSForegroundColorAttributeName: UIColor.blackColor,
+                                      NSFontAttributeName: font};
     }
 
         
@@ -122,6 +127,11 @@
         NSLog(@"my range is %@", NSStringFromRange(selectedRange));
         // 変更を加えたattributedStringを戻す。
         tv.attributedText = theText;
+        
+        //タイピングプロパティを再設定
+        UIFont *font = self->tv.font; // フォントを取得
+        self->tv.typingAttributes = @{NSForegroundColorAttributeName: UIColor.blackColor,
+                                      NSFontAttributeName: font};
     }
 
 }
@@ -137,6 +147,10 @@
         //[theText addAttribute: NSForegroundColorAttributeName value: UIColor.redColor range: selectedRange];
         // 変更を加えたattributedStringを戻す。
         self->tv.attributedText = theText;
+        
+        UIFont *font = self->tv.font; // フォントを取得
+        self->tv.typingAttributes = @{NSForegroundColorAttributeName: UIColor.blackColor,
+                                      NSFontAttributeName: font};
       
     }
 

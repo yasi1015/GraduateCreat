@@ -91,7 +91,7 @@
                         cource.placeholder = @"xxxxxxxxx";
                         cource.returnKeyType = UIReturnKeyNext;
                         cource.secureTextEntry = NO;
-                        [self.view addSubview:cource];
+                        [cell.contentView addSubview:cource];
                         }
         }
         
