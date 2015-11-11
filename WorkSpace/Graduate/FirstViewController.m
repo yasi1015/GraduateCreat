@@ -25,7 +25,7 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
     [self deBugInit];
     [self secondViewDidLoad];
-    [self UINavigationController];
+    //[self UINavigationController];
     [self myTableView];
     [self ipadoriphone];
 
@@ -137,7 +137,7 @@
 
 
 
--(void)UINavigationController{
+/*-(void)UINavigationController{
     NSLog(@"UINavigationController");
     
     
@@ -160,11 +160,11 @@
     self.navigationItem.leftBarButtonItem = btn_left;
    
 }
-
+*/
 //selector
 
 
-- (void)ButtonPressed:(id) sender{
+/*- (void)ButtonPressed:(id) sender{
     // ここに処理を書く
     NSLog(@"ButtonPreesed");
 }
@@ -188,6 +188,7 @@
     NSLog(@"要素数:%d",x);
     
 }
+ */
 
 -(void)deBugInit{
     

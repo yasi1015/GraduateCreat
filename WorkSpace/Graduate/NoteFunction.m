@@ -91,9 +91,18 @@
         NSLog(@"called if文");
         // attributedStringを取得して、Mutableにコピー。
         NSMutableAttributedString *theText = [tv.attributedText mutableCopy];
+        NSLog(@"theText = %@ new!" ,theText);
         // 選択部分だけ文字色を赤に変える。
-        [theText addAttribute:NSForegroundColorAttributeName value: UIColor.redColor range:selectedRange ];
+        [theText addAttribute:NSForegroundColorAttributeName value: UIColor.redColor range:selectedRange];
         
+        //---------------------------
+        //選択範囲の後ろを黒にもどす
+        
+        int location = selectedRange.length + selectedRange.location;
+        NSLog(@"int x = %d new!,",location);
+       //なぜかエラー
+       //[theText addAttribute:NSForegroundColorAttributeName value: UIColor.blackColor range:NSMakeRange(location,1)];
+    
         NSLog(@"my range is %@", NSStringFromRange(selectedRange));
         // 変更を加えたattributedStringを戻す。
         tv.attributedText = theText;
@@ -130,7 +139,32 @@
 
 -(void)changebutton{
     NSLog(@"changebutton");
-     NSRange selectedRange = self->tv.selectedRange;
+    //選択範囲を取得
+    //NSString *selectedText = [tv.text substringWithRange:tv.selectedRange];
+    //NSLog(@"selectedText:%@",selectedText);
+    //NSLog(@"文字数は%dです！ new ",[selectedText length]);
+    
+    //選択範囲の取得
+    NSRange selectedRange = self->tv.selectedRange;
+    //tv.textをstr2に設定
+    NSMutableString *str2 = [NSMutableString stringWithString:tv.text];
+    
+    // 文字列を置換(文字列の4番目から6文字分を置換)
+    [str2 replaceCharactersInRange:selectedRange withString:@"「　　　　」"];
+    NSLog(@"str2 = %@", str2);
+    
+    tv.text = str2;
+
+    
+   
+    //tv.text = str2;
+    
+    //NSString *substr3 = [str substringWithRange:selectedRange];
+    //NSLog(@"str = %@",substr3);
+    
+    
+    
+    /*NSRange selectedRange = self->tv.selectedRange;
     
     if (selectedRange.length > 0) {
         // attributedStringを取得して、Mutableにコピー。
@@ -142,11 +176,11 @@
         self->tv.attributedText = theText;
       
     }
-
+    */
 }
 
 
-- (void)textViewDidChangeSelection:(UITextView *)textView {
+/*- (void)textViewDidChangeSelection:(UITextView *)textView {
     NSString *selectedText = [textView.text substringWithRange:textView.selectedRange];
     NSLog(@"selectedText:%@",selectedText);
     if(selectedText == nil || [selectedText isEqualToString:@""]){
@@ -158,9 +192,9 @@
     }
         
 }
+*/
 
-
--(void)initToolBar{
+/*-(void)initToolBar{
     UIView* accessoryView =[[UIView alloc] initWithFrame:CGRectMake(0,0,320,50)];
     accessoryView.backgroundColor = [UIColor whiteColor];
     
@@ -175,7 +209,7 @@
     
     //inputText.inputAccessoryView = accessoryView;
 }
-
+*/
 
 
 

@@ -12,12 +12,12 @@
 @implementation FileViewController
 
 -(void)viewDidLoad{
-    [super viewDidLoad];
     myTableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStyleGrouped];
     [self secondViewDidLoad];
     [self myTableView];
     [self fileInit];
     [self UINavigationController];
+     NSLog(@" dataSource = %@", dataSource);
  
 }
 
@@ -26,7 +26,7 @@
     self.title = @"ファイル作成";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [list removeAllObjects];
+    //[list removeAllObjects];
  
 
 }
@@ -63,6 +63,7 @@
                          withIntermediateDirectories:YES
                                           attributes:nil
                                                error:&error];
+    dataSource = list;
     if (result) {
         NSLog(@"ディレクトリの作成に成功：%@", docpath);
     } else {
@@ -75,7 +76,8 @@
  * テーブルのセルの数を返す
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [list count];
+    return [dataSource count];
+    //return [list count];
 }
 
 /**
@@ -93,8 +95,10 @@
     }
     
     // セルにテキストを設定
-    NSLog(@"list = %@ new!",list);
-    cell.textLabel.text = [list objectAtIndex:indexPath.row];
+    //NSLog(@"list = %@ new!",list);
+    NSLog(@"datasource = %@ ",dataSource);
+    
+    cell.textLabel.text = [dataSource objectAtIndex:indexPath.row];
     NSLog(@"cell = %@",cell.textLabel.text);
     
     return cell;
@@ -136,7 +140,19 @@
      target:self  // デリゲートのターゲットを指定
      action:@selector(ButtonPressed:)  // ボタンが押されたときに呼ばれるメソッドを指定
      ];
+   
     self.navigationItem.rightBarButtonItem = btn;
+    
+    //左ボタン
+    UIBarButtonItem *btn2 =
+    [[UIBarButtonItem alloc]
+     initWithBarButtonSystemItem:UIBarButtonSystemItemCompose  // スタイルを指定
+     target:self  // デリゲートのターゲットを指定
+     action:@selector(ButtonDelete:)  // ボタンが押されたときに呼ばれるメソッドを指定
+     ];
+    
+    self.navigationItem.leftBarButtonItem = btn;
+
     
 }
 
@@ -147,7 +163,10 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"OK"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action) {
+                                                
                                                 NSLog(@"OK pushed");
+                                                NoteFunction *note =[NoteFunction new];
+                                                [self.navigationController pushViewController:note animated:NO];
                                                 
                                             }]];
     
@@ -159,6 +178,42 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)ButtonDelete:(id) sender{
+    
+    NSLog(@"newFileInit");
+    homedir = NSHomeDirectory();
+    NSLog(@"homedir = %@",homedir);
+    //NSArrayのhomedirのファイルの中を検索する
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSLog(@"fileManager %@",fileManager);
+    //エラー用の変数を作成
+    NSError *error;
+    NSLog(@"error = %@",error);
+    NSString *documentsDir = [homedir stringByAppendingString:@"/Documents"];
+    NSLog(@"現在のディレクトリは%@です",documentsDir);
+    
+    list = [fileManager contentsOfDirectoryAtPath:documentsDir error:&error];
+    NSLog(@"list = %@ new !",list);
+    
+    NSString *docpath = [documentsDir stringByAppendingPathComponent:string];
+    
+    //ファイル作成
+    BOOL result = [fileManager createDirectoryAtPath:docpath
+                         withIntermediateDirectories:YES
+                                          attributes:nil
+                                               error:&error];
+    
+    
+    BOOL test = [fileManager removeItemAtPath:documentsDir error:&error];
+    if (test) {
+        NSLog(@"ファイルを削除に成功：%@", documentsDir);
+        dataSource = list;
+        [self -> myTableView reloadData];
+        
+    } else {
+        NSLog(@"ファイルの削除に失敗：%@", error.description);
+    }
+}
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     string = [NSString new];
     string = textField.text;
@@ -183,8 +238,7 @@
     NSLog(@"現在のディレクトリは%@です",documentsDir);
     
     list = [fileManager contentsOfDirectoryAtPath:documentsDir error:&error];
-    [list removeAllObjects];
-    NSLog(@"list = %@",list);
+    NSLog(@"list = %@ new !",list);
     
     NSString *docpath = [documentsDir stringByAppendingPathComponent:string];
     
@@ -193,9 +247,14 @@
                          withIntermediateDirectories:YES
                                           attributes:nil
                                                error:&error];
+  
     if (result) {
         NSLog(@"ディレクトリの作成に成功：%@", docpath);
-        [myTableView reloadData];
+    
+        dataSource = list;
+        NSLog(@"dataSource = %@ ",dataSource);
+     [self -> myTableView reloadData];
+     //[self.view addSubview:myTableView];
     } else {
         NSLog(@"ディレクトリの作成に失敗：%@", error.description);
     }
